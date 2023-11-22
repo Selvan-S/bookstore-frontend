@@ -4,6 +4,7 @@ import Spinner from "../components/Spinner";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSnackbar } from "notistack";
+import API_URL from "../../config/global";
 
 const DeleteBook = () => {
   const [loading, setLoading] = useState(false);
@@ -14,7 +15,7 @@ const DeleteBook = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`http://localhost:5555/books/${id}`)
+      .get(`${API_URL}/books/${id}`)
       .then((response) => {
         setBook(response.data);
         setLoading(false);
@@ -27,7 +28,7 @@ const DeleteBook = () => {
   const handleDeleteBook = () => {
     setLoading(true);
     axios
-      .delete(`http://localhost:5555/books/${id}`)
+      .delete(`${API_URL}/books/${id}`)
       .then(() => {
         setLoading(false);
         enqueueSnackbar("Book is Deleted successfully", { variant: "success" });
@@ -36,7 +37,7 @@ const DeleteBook = () => {
       .catch((error) => {
         setLoading(false);
         alert("An error happened. Please Check console");
-        enqueueSnackbar('Error', {variant: 'error'})
+        enqueueSnackbar("Error", { variant: "error" });
         console.log(error);
       });
   };

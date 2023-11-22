@@ -4,6 +4,7 @@ import Spinner from "../components/Spinner";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useSnackbar } from "notistack";
+import API_URL from "../../config/global";
 
 const CreateBook = () => {
   const [title, setTitle] = useState("");
@@ -20,10 +21,10 @@ const CreateBook = () => {
     };
     setLoading(true);
     axios
-      .post("http://localhost:5555/books", data)
+      .post(`${API_URL}/books`, data)
       .then(() => {
         setLoading(false);
-        enqueueSnackbar('Book Created successfully', { variant: 'success' });
+        enqueueSnackbar("Book Created successfully", { variant: "success" });
         navigate("/");
       })
       .catch((error) => {
