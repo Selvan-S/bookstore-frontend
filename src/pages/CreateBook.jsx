@@ -37,7 +37,6 @@ const CreateBook = () => {
       });
   };
   return (
-    /* grid place-items-center*/
     <div className="p-4 mt-4 max-w-screen-xl mx-auto">
       <BackButton />
       <h1 className="text-3xl mt-4">Create Book</h1>
