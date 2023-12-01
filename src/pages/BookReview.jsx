@@ -34,8 +34,6 @@ const BookReview = (user) => {
       });
   }, [id]);
   const deleteReview = (reviewId, index) => {
-    // const user = JSON.parse(user.user.id);
-    console.log(`user.user.id ${user} reviewId: ${reviewId} index: ${index}`);
     axios
       .delete(`${API_URL}/review/${reviewId}`, {
         data: { user_id: user.user.id },
@@ -43,7 +41,6 @@ const BookReview = (user) => {
       .then((response) => {
         setBook((prevState) => {
           prevState.reviews.splice(index, 1);
-          console.log(JSON.stringify(response));
           return {
             ...prevState,
           };
@@ -54,26 +51,11 @@ const BookReview = (user) => {
       });
   };
   const bookId = book._id;
-  console.log("bookId: " + bookId);
   const bookTitle = book.title;
   const bookAuthor = book.author;
   const bookPublishYear = book.publishYear;
   const reviewLen = book.reviews.length;
   const reviews = book.reviews;
-  try {
-    const reviewId = reviews.map((review, index) => {
-      return console.log("review: " + review._id + "\n" + review.name);
-    });
-    console.log("reviewId: " + JSON.stringify(reviews));
-  } catch (error) {
-    console.error(`Unable to get reviwe ids and name`);
-  }
-  console.log(reviewLen);
-  try {
-    console.log(`user: ${JSON.stringify(user)} userid: ${user.user.id}`);
-  } catch (error) {
-    console.error(`Unable to get user and user id`);
-  }
 
   return (
     <div className="p-4 mt-4 max-w-screen-xl mx-auto">

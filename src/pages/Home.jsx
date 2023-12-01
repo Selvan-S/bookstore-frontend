@@ -61,7 +61,6 @@ const Home = () => {
     axios
       .get(`${API_URL}/books?${by}=${query}&page=${page}`)
       .then((response) => {
-        console.log(response.data);
         setBooks(response.data.books);
       })
       .catch((e) => {
@@ -93,9 +92,7 @@ const Home = () => {
     );
     if (response.data.page >= 0) {
       let count = page;
-      console.log("previous page: " + count);
       let decreaseCount = count;
-      console.log("count decrease: " + decreaseCount);
       count--;
       setPage(response.data.page - 1);
       if (response.data.page == 0) {
@@ -111,15 +108,11 @@ const Home = () => {
       `${API_URL}/books?${searchBy}=${defaultQuery}&page=${page}`
     );
     let totalPage = Math.round(response.data.total_results / 10);
-    console.log(totalPage);
-
     if (response.data.page <= totalPage) {
       let count = response.data.page;
-      console.log("next count: " + count);
       let increaseCount = count;
       setPage(response.data.page + 1);
       count = count + 1;
-      console.log("count increase: " + increaseCount);
       if (totalPage == response.data.page) {
         setPage(totalPage);
       }

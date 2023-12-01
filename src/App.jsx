@@ -17,7 +17,7 @@ const App = () => {
   const [userInfo, setUserInfo] = useState(initialInfoState);
   const [limit, setLimit] = useState(0);
   let count = 0;
-  console.log(`userinfo outside: ${JSON.stringify(userInfo)}`);
+  
   async function login(user = null) {
     setUser(user);
   }
@@ -32,17 +32,16 @@ const App = () => {
         let Info = JSON.parse(sessionStorage.getItem("userInfo"));
         setUserInfo(Info);
       } catch (error) {
-        console.log(`cant parse userInfo ${JSON.stringify(userInfo)}`);
+        console.log(error);
       }
       login(userInfo);
     } catch (error) {
-      console.log(`userLogin() ${error}`);
+      console.log(`${error}`);
     }
   };
   if (count < 2 && limit < 2) {
     count = limit + 1;
     setLimit(count);
-    console.log(`count: ${count} limit: ${limit}`);
     userLogin();
   }
   return (
@@ -53,7 +52,7 @@ const App = () => {
             href="/"
             className="flex items-center space-x-3 rtl:space-x-reverse"
           >
-            <img src="/public/books.png" className="h-8" alt="Bookstore Logo" />
+            <img src="public/books.png" className="h-8" alt="Bookstore Logo" />
             <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
               Bookstore
             </span>
