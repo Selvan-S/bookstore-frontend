@@ -42,7 +42,7 @@ const AddAndEditReview = (user) => {
         .then((response) => {
           setSubmitted(true);
           setLoading(true);
-          console.log(response.data);
+          // console.log(response.data);
         })
         .catch((e) => {
           console.log(e);
@@ -54,7 +54,7 @@ const AddAndEditReview = (user) => {
         .then((response) => {
           setSubmitted(true);
           setLoading(true);
-          console.log(response.data);
+          // console.log(response.data);
         })
         .catch((e) => {
           console.log(e);
