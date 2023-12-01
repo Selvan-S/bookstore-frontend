@@ -1,8 +1,12 @@
 import { Link } from "react-router-dom";
 import { AiOutlineEdit } from "react-icons/ai";
 import { BsInfoCircle } from "react-icons/bs";
-import { MdOutlineAddBox, MdOutlineDelete } from "react-icons/md";
-const BooksTable = ({books}) => {
+import {
+  MdOutlineAddBox,
+  MdOutlineDelete,
+  MdOutlineReviews,
+} from "react-icons/md";
+const BooksTable = ({ books }) => {
   return (
     <table className="w-full border-separate border-spacing-2">
       <thead>
@@ -35,6 +39,9 @@ const BooksTable = ({books}) => {
             </td>
             <td className="border border-slate-700 rounded-md text-center">
               <div className="flex justify-center gap-x-4">
+                <Link to={`/books/${book._id}`}>
+                  <MdOutlineReviews className="text-2xl text-green-800" />
+                </Link>
                 <Link to={`/books/details/${book._id}`}>
                   <BsInfoCircle className="text-2xl text-green-800" />
                 </Link>
@@ -51,6 +58,6 @@ const BooksTable = ({books}) => {
       </tbody>
     </table>
   );
-}
+};
 
 export default BooksTable

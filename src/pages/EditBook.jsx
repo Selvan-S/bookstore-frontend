@@ -10,6 +10,7 @@ const EditBook = () => {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [publishYear, setPublishYear] = useState("");
+  const [about, setAbout] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
@@ -23,6 +24,7 @@ const EditBook = () => {
         setTitle(response.data.title);
         setAuthor(response.data.author);
         setPublishYear(response.data.publishYear);
+        setAbout(response.data.about);
         setLoading(false);
       })
       .catch((error) => {
@@ -37,6 +39,7 @@ const EditBook = () => {
       title,
       author,
       publishYear,
+      about,
     };
     setLoading(true);
     axios
@@ -85,6 +88,18 @@ const EditBook = () => {
             type="text"
             value={publishYear}
             onChange={(e) => setPublishYear(e.target.value)}
+            className="border-2 border-gray-500 px-4 py-2 w-full"
+          />
+        </div>
+        <div className="my-4">
+          <label className="text-xl mr-4 text-gray-500">About</label>
+          <textarea
+            name="about"
+            id="about"
+            cols="18"
+            rows="4"
+            value={about}
+            onChange={(e) => setAbout(e.target.value)}
             className="border-2 border-gray-500 px-4 py-2 w-full"
           />
         </div>

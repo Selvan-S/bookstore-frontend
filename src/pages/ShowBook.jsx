@@ -47,6 +47,19 @@ const ShowBook = () => {
             <span className="text-xl mr-4 text-gray-500">Publish Year</span>
             <span>{book.publishYear}</span>
           </div>
+          {book.about != "" ? (
+            <div className="my-4 px-4">
+              <span className="text-xl mr-4 text-gray-500">About</span>
+              <span>{book.about}</span>
+            </div>
+          ) : (
+            <div className="my-4 px-4">
+              <span className="text-xl mr-4 text-gray-500">About</span>
+              <span className="text-base mr-4 text-gray-500">
+                No information is provided
+              </span>
+            </div>
+          )}
           <div className="my-4 px-4">
             <span className="text-xl mr-4 text-gray-500">Created Time</span>
             <span>{new Date(book.createdAt).toString()}</span>

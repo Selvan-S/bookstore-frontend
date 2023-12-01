@@ -30,13 +30,18 @@ const BookModal = ({book, onClose}) => {
           <h2 className="my-1">{book.author}</h2>
         </div>
 
-        <p className="mt-4">Anything You Want to Show</p>
-        <p className="my-2">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Soluta
-          commodi sequi aut. Quas consequuntur, dignissimos dolor quidem ipsum
-          dolorum eum inventore error eaque nostrum, deserunt ratione, atque
-          recusandae eligendi velit!
-        </p>
+        <p className="mt-4 text-base text-gray-500">About this Book</p>
+        {book.about != "" ? (
+          <div className="my-2 px-4">
+            <span>{book.about}</span>
+          </div>
+        ) : (
+          <div className="my-2 px-4">
+            <span className="text-base mt-4 text-gray-500">
+              No information is provided
+            </span>
+          </div>
+        )}
       </div>
     </div>
   );
