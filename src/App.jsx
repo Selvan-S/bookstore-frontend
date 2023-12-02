@@ -76,7 +76,7 @@ const App = () => {
                     className="text-lg max-sm:text-base text-gray-900 hover:text-blue-700 dark:text-blue-500 dark:hover:text-white pr-3"
                     style={{ cursor: "pointer" }}
                   >
-                    Logout{"  "}
+                    Logout{" "}
                     <strong className="text-gray-900 hover:text-blue-700 dark:hover:text-white dark:text-sky-400 text-xl pl-1">
                       {user.name}
                     </strong>
