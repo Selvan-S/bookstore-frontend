@@ -53,10 +53,10 @@ const Login = (login) => {
             type="text"
             value={user.id}
             onChange={handleInputChange}
-            placeholder="123"
+            placeholder="1234"
           />
           <p className="text-red-500 text-xs italic">
-            Please choose a password.
+            Don't forget your User ID.
           </p>
         </div>
         <div className="flex items-center justify-center">
