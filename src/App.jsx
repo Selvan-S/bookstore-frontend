@@ -50,7 +50,7 @@ const App = () => {
         <div className="max-sm:flex max-sm:flex-wrap max-sm:items-baseline max-w-screen-xl flex flex-wrap items-center justify-between mx-auto md:p-3">
           <a href="/" className="flex items-center space-x-2">
             <img
-              src="..\public\books.png"
+              src="books.png"
               className="max-sm:hidden max-sm:h-8 pt-4 pl-4"
               alt="Logo"
             />
