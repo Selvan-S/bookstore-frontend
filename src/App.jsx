@@ -47,47 +47,52 @@ const App = () => {
   }
   return (
     <div>
-      <nav className="bg-white border-gray-200 dark:bg-gray-900">
-        <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-          <a
-            href="/"
-            className="flex items-center space-x-3 rtl:space-x-reverse"
-          >
-            <img src="public/books.png" className="h-8" alt="Bookstore Logo" />
-            <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
+      <nav className="bg-white border-gray-200 dark:bg-gray-900 pb-3 max-sm:pb-4">
+        <div className="max-sm:flex max-sm:flex-wrap max-sm:items-baseline max-w-screen-xl flex flex-wrap items-center justify-between mx-auto md:p-3">
+          <a href="/" className="flex items-center space-x-2">
+            <img
+              src="..\public\books.png"
+              className="max-sm:hidden max-sm:h-8 pt-4 pl-4"
+              alt="Logo"
+            />
+            <span className="pt-4 max-sm:pl-3 text-xl self-center sm:text-2xl font-semibold whitespace-nowrap dark:text-white">
               Bookstore
             </span>
           </a>
-          <ul className="font-medium flex flex-row p-4 md:p-0 mt-4 md:gap-8 space-x-8 mt-0">
-            <li>
-              <a
-                href="/"
-                className="block py-2 px-3 text-gray-900 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500"
-                aria-current="page"
-              >
-                Books
-              </a>
-            </li>
-            <li>
-              {user ? (
+          <div>
+            <ul className="text-base flex flex-row items-baseline p-3 md:p-0 mt-4 md:gap-8 space-x-4 m-0">
+              <li>
                 <a
-                  onClick={logout}
-                  className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-                  style={{ cursor: "pointer" }}
+                  href="/"
+                  className="text-lg max-sm:text-base text-gray-900 hover:text-blue-700 dark:text-blue-500 dark:hover:text-white"
+                  aria-current="page"
                 >
-                  Logout{" "}
-                  <strong className="text-sky-400 text-xl"> {user.name}</strong>
+                  Books
                 </a>
-              ) : (
-                <Link
-                  to={"/login"}
-                  className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-                >
-                  Login
-                </Link>
-              )}
-            </li>
-          </ul>
+              </li>
+              <li>
+                {user ? (
+                  <a
+                    onClick={logout}
+                    className="text-lg max-sm:text-base text-gray-900 hover:text-blue-700 dark:text-blue-500 dark:hover:text-white pr-3"
+                    style={{ cursor: "pointer" }}
+                  >
+                    Logout{" "}
+                    <strong className="text-gray-900 hover:text-blue-700 dark:hover:text-white dark:text-sky-400 text-xl pl-1">
+                      {user.name}
+                    </strong>
+                  </a>
+                ) : (
+                  <Link
+                    to={"/login"}
+                    className="text-lg max-sm:text-base text-gray-900 hover:text-blue-700 dark:text-blue-500 dark:hover:text-white pr-3"
+                  >
+                    Login
+                  </Link>
+                )}
+              </li>
+            </ul>
+          </div>
         </div>
       </nav>
       <div>
