@@ -17,7 +17,7 @@ const App = () => {
   const [userInfo, setUserInfo] = useState(initialInfoState);
   const [limit, setLimit] = useState(0);
   let count = 0;
-  // console.log(`userinfo outside: ${JSON.stringify(userInfo)}`);
+  
   async function login(user = null) {
     setUser(user);
   }
@@ -32,7 +32,7 @@ const App = () => {
         let Info = JSON.parse(sessionStorage.getItem("userInfo"));
         setUserInfo(Info);
       } catch (error) {
-        // console.log(`cant parse userInfo ${JSON.stringify(userInfo)}`);
+        console.log(error);
       }
       login(userInfo);
     } catch (error) {
@@ -42,7 +42,6 @@ const App = () => {
   if (count < 2 && limit < 2) {
     count = limit + 1;
     setLimit(count);
-    // console.log(`count: ${count} limit: ${limit}`);
     userLogin();
   }
   return (
