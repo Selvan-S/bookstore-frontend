@@ -77,7 +77,7 @@ const App = () => {
                     style={{ cursor: "pointer" }}
                   >
                     Logout{" "}
-                    <strong className="text-gray-900 hover:text-blue-700 dark:hover:text-white dark:text-sky-400 text-xl pl-1">
+                    <strong className="text-sky-400 hover:text-blue-700 dark:hover:text-white text-xl pl-1">
                       {user.name}
                     </strong>
                   </a>
