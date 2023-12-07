@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import Spinner from "../components/Spinner";
 import { Link } from "react-router-dom";
-import { AiOutlineEdit } from "react-icons/ai";
-import { BsInfoCircle } from "react-icons/bs";
-import { MdOutlineAddBox, MdOutlineDelete } from "react-icons/md";
+import { MdOutlineAddBox } from "react-icons/md";
 import { FcPrevious, FcNext } from "react-icons/fc";
 import BooksTable from "../components/home/BooksTable";
 import BookCards from "../components/home/BookCards";
@@ -91,16 +89,12 @@ const Home = () => {
       `${API_URL}/books?${searchBy}=${defaultQuery}&page=${page}`
     );
     if (response.data.page >= 0) {
-      let count = page;
-      let decreaseCount = count;
-      count--;
       setPage(response.data.page - 1);
+      refreshList();
       if (response.data.page == 0) {
         setPage(0);
         refreshList();
       }
-
-      refreshList();
     }
   };
   const nextPage = async () => {
@@ -108,16 +102,13 @@ const Home = () => {
       `${API_URL}/books?${searchBy}=${defaultQuery}&page=${page}`
     );
     let totalPage = Math.round(response.data.total_results / 10);
-    if (response.data.page <= totalPage) {
-      let count = response.data.page;
-      let increaseCount = count;
+    if (response.data.page < totalPage) {
       setPage(response.data.page + 1);
-      count = count + 1;
+      refreshList();
       if (totalPage == response.data.page) {
         setPage(totalPage);
+        refreshList();
       }
-      // setPage(response.data.page);
-      refreshList();
     }
   };
   return (
