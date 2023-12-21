@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import { Route, Routes, Link } from "react-router-dom";
 import Home from "./pages/Home";
 import CreateBook from "./pages/CreateBook";
@@ -8,15 +8,28 @@ import DeleteBook from "./pages/DeleteBook";
 import BookReview from "./pages/BookReview";
 import Login from "./components/home/Login";
 import AddAndEditReview from "./pages/AddAndEditReview";
+
 const App = () => {
+  const [user, setUser] = useState(null);
+
+  /**
+   * old code
   const initialInfoState = {
     name: "",
     id: "",
   };
-  const [user, setUser] = React.useState(null);
   const [userInfo, setUserInfo] = useState(initialInfoState);
   const [limit, setLimit] = useState(0);
   let count = 0;
+   */
+
+  useEffect(() => {
+    if (user != null) {
+      sessionStorage.setItem("userInfo", JSON.stringify(user));
+    } else {
+      setUser(JSON.parse(sessionStorage.getItem("userInfo")));
+    }
+  }, [user]);
 
   async function login(user = null) {
     setUser(user);
@@ -26,24 +39,24 @@ const App = () => {
     setUser(null);
     sessionStorage.removeItem("userInfo");
   }
-  const userLogin = () => {
-    try {
-      try {
-        let Info = JSON.parse(sessionStorage.getItem("userInfo"));
-        setUserInfo(Info);
-      } catch (error) {
-        console.log(error);
-      }
-      login(userInfo);
-    } catch (error) {
-      console.log(`${error}`);
-    }
-  };
-  if (count < 2 && limit < 2) {
-    count = limit + 1;
-    setLimit(count);
-    userLogin();
+
+  /*
+old code for reference
+const userLogin = async () => {
+  try {
+    let Info = await JSON.parse(sessionStorage.getItem("userInfo"));
+    setUserInfo(Info);
+    login(userInfo);
+  } catch (error) {
+    console.log(`${error}`);
   }
+};
+if (count < 2 && limit < 2) {
+  count = limit + 1;
+  setLimit(count);
+  userLogin();
+}
+*/
   return (
     <div>
       <nav className="bg-white border-gray-200 dark:bg-gray-900 pb-3 max-sm:pb-4">
