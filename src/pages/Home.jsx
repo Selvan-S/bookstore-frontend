@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
 import axios from "axios";
-import Spinner from "../components/Spinner";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { FcNext, FcPrevious } from "react-icons/fc";
 import { MdOutlineAddBox } from "react-icons/md";
-import { FcPrevious, FcNext } from "react-icons/fc";
-import BooksTable from "../components/home/BooksTable";
-import BookCards from "../components/home/BookCards";
+import { Link } from "react-router-dom";
 import API_URL from "../../config/global";
+import Spinner from "../components/Spinner";
+import BookCards from "../components/home/BookCards";
+import BooksTable from "../components/home/BooksTable";
 
 const Home = () => {
   const [books, setBooks] = useState([]);
