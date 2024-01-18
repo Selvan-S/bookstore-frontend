@@ -6,7 +6,7 @@ import API_URL from "../../config/global";
 import BackButton from "../components/BackButton";
 import Spinner from "../components/Spinner";
 
-const CreateBook = () => {
+const CreateBook = ({ user }) => {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [publishYear, setPublishYear] = useState("");
@@ -20,6 +20,8 @@ const CreateBook = () => {
       author,
       publishYear,
       about,
+      userId: user.id,
+      userName: user.name,
     };
     setLoading(true);
     axios
@@ -44,52 +46,60 @@ const CreateBook = () => {
       <h1 className="text-3xl mt-4">Create Book</h1>
       {loading ? Spinner : ""}
       <div className="flex flex-col border-2 border-sky-400 rounded-xl sm:w-[600px] w-[328px] p-4 mx-auto mt-10">
-        <div className="my-4">
-          <label className="text-xl mr-4 text-gray-500">Title</label>
-          <input
-            placeholder="title"
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            className="border-2 border-gray-500 px-4 py-2 w-full"
-          />
-        </div>
-        <div className="my-4">
-          <label className="text-xl mr-4 text-gray-500">Author</label>
-          <input
-            placeholder="author"
-            type="text"
-            value={author}
-            onChange={(e) => setAuthor(e.target.value)}
-            className="border-2 border-gray-500 px-4 py-2 w-full"
-          />
-        </div>
-        <div className="my-4">
-          <label className="text-xl mr-4 text-gray-500">Publish Year</label>
-          <input
-            placeholder="year"
-            type="text"
-            value={publishYear}
-            onChange={(e) => setPublishYear(e.target.value)}
-            className="border-2 border-gray-500 px-4 py-2 w-full"
-          />
-        </div>
-        <div className="my-4">
-          <label className="text-xl mr-4 text-gray-500">About book</label>
-          <textarea
-            placeholder="About this book! (optional)"
-            name="about"
-            id="about"
-            cols="18"
-            rows="4"
-            value={about}
-            onChange={(e) => setAbout(e.target.value)}
-            className="border-2 border-gray-500 px-4 py-2 w-full"
-          />
-        </div>
-        <button className="p-2 bg-sky-300 m-8" onClick={handleSaveBook}>
-          Save
-        </button>
+        {user ? (
+          <div>
+            <div className="my-4">
+              <label className="text-xl mr-4 text-gray-500">Title</label>
+              <input
+                placeholder="title"
+                type="text"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                className="border-2 border-gray-500 px-4 py-2 w-full"
+              />
+            </div>
+            <div className="my-4">
+              <label className="text-xl mr-4 text-gray-500">Author</label>
+              <input
+                placeholder="author"
+                type="text"
+                value={author}
+                onChange={(e) => setAuthor(e.target.value)}
+                className="border-2 border-gray-500 px-4 py-2 w-full"
+              />
+            </div>
+            <div className="my-4">
+              <label className="text-xl mr-4 text-gray-500">Publish Year</label>
+              <input
+                placeholder="year"
+                type="text"
+                value={publishYear}
+                onChange={(e) => setPublishYear(e.target.value)}
+                className="border-2 border-gray-500 px-4 py-2 w-full"
+              />
+            </div>
+            <div className="my-4">
+              <label className="text-xl mr-4 text-gray-500">About book</label>
+              <textarea
+                placeholder="About this book! (optional)"
+                name="about"
+                id="about"
+                cols="18"
+                rows="4"
+                value={about}
+                onChange={(e) => setAbout(e.target.value)}
+                className="border-2 border-gray-500 px-4 py-2 w-full"
+              />
+            </div>
+            <button className="p-2 bg-sky-300 m-8" onClick={handleSaveBook}>
+              Save
+            </button>
+          </div>
+        ) : (
+          <div className="mx-auto text-xl text-gray-500">
+            <strong>Please log in to Create Book</strong>
+          </div>
+        )}
       </div>
     </div>
   );

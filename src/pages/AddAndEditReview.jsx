@@ -23,7 +23,6 @@ const AddAndEditReview = (user) => {
   const handleInputChange = (event) => {
     setReview(event.target.value);
   };
-
   const saveReview = () => {
     let data = {
       text: review,
@@ -105,7 +104,9 @@ const AddAndEditReview = (user) => {
             )}
           </div>
         ) : (
-          <div className="text-xl mr-4 text-gray-500">Please log in.</div>
+          <div className="mx-auto text-xl text-gray-500">
+            <strong>Please log in to Add Review</strong>
+          </div>
         )}
       </div>
     </div>

@@ -1,12 +1,8 @@
-import { Link } from "react-router-dom";
-import { AiOutlineEdit } from "react-icons/ai";
+import { AiOutlineEdit, AiOutlineLogin } from "react-icons/ai";
 import { BsInfoCircle } from "react-icons/bs";
-import {
-  MdOutlineAddBox,
-  MdOutlineDelete,
-  MdOutlineReviews,
-} from "react-icons/md";
-const BooksTable = ({ books }) => {
+import { MdOutlineDelete, MdOutlineReviews } from "react-icons/md";
+import { Link } from "react-router-dom";
+const BooksTable = ({ books, user }) => {
   return (
     <table className="w-full border-separate border-spacing-2">
       <thead>
@@ -45,12 +41,25 @@ const BooksTable = ({ books }) => {
                 <Link to={`/books/details/${book._id}`}>
                   <BsInfoCircle className="text-2xl text-green-800" />
                 </Link>
-                <Link to={`/books/edit/${book._id}`}>
-                  <AiOutlineEdit className="text-2xl text-yellow-600" />
-                </Link>
-                <Link to={`/books/delete/${book._id}`}>
-                  <MdOutlineDelete className="text-2xl text-red-600" />
-                </Link>
+
+                {user ? (
+                  <>
+                    {book.userId === user.id && book.userName === user.name && (
+                      <div className="flex gap-x-4">
+                        <Link to={`/books/edit/${book._id}`}>
+                          <AiOutlineEdit className="text-2xl text-yellow-600" />
+                        </Link>
+                        <Link to={`/books/delete/${book._id}`}>
+                          <MdOutlineDelete className="text-2xl text-red-600" />
+                        </Link>
+                      </div>
+                    )}
+                  </>
+                ) : (
+                  <Link to={"/login"}>
+                    <AiOutlineLogin className="text-2xl text-yellow-600" />
+                  </Link>
+                )}
               </div>
             </td>
           </tr>
@@ -60,4 +69,4 @@ const BooksTable = ({ books }) => {
   );
 };
 
-export default BooksTable
+export default BooksTable;

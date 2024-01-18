@@ -8,7 +8,7 @@ import Spinner from "../components/Spinner";
 import BookCards from "../components/home/BookCards";
 import BooksTable from "../components/home/BooksTable";
 
-const Home = () => {
+const Home = ({ user }) => {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showType, setShowType] = useState("card");
@@ -178,9 +178,9 @@ const Home = () => {
       {loading ? (
         <Spinner />
       ) : showType === "table" ? (
-        <BooksTable books={books} />
+        <BooksTable books={books} user={user} />
       ) : (
-        <BookCards books={books} />
+        <BookCards books={books} user={user} />
       )}
       <div className="flex justify-between">
         <button

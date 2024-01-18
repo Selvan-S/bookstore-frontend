@@ -109,10 +109,10 @@ if (count < 2 && limit < 2) {
       </nav>
       <div>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/books/create" element={<CreateBook />} />
+          <Route path="/" element={<Home user={user} />} />
+          <Route path="/books/create" element={<CreateBook user={user} />} />
           <Route path="/books/details/:id" element={<ShowBook />} />
-          <Route path="/books/edit/:id" element={<EditBook />} />
+          <Route path="/books/edit/:id" element={<EditBook user={user} />} />
           <Route path="/books/delete/:id" element={<DeleteBook />} />
           <Route path="/books/:id" element={<BookReview user={user} />} />
           <Route

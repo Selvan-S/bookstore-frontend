@@ -6,11 +6,11 @@ import { BsInfoCircle } from "react-icons/bs";
 import { MdOutlineDelete } from "react-icons/md";
 import BookSingleCard from "./BookSingleCard";
 
-const BookCards = ({ books }) => {
+const BookCards = ({ books, user }) => {
   return (
     <div className="grid sm:grid-cols-2 lg:grid-cols-3">
       {books.map((item) => (
-        <BookSingleCard key={item._id} book={item} />
+        <BookSingleCard key={item._id} book={item} user={user} />
       ))}
     </div>
   );
