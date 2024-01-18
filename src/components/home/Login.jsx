@@ -23,7 +23,7 @@ const Login = (login) => {
         <div className="mb-4">
           <label
             className="block text-gray-700 text-sm font-bold mb-2"
-            for="username"
+            htmlFor="username"
           >
             Username
           </label>
@@ -41,7 +41,7 @@ const Login = (login) => {
         <div className="mb-6">
           <label
             className="block text-gray-700 text-sm font-bold mb-2"
-            for="password"
+            htmlFor="password"
           >
             User ID
           </label>
@@ -56,7 +56,7 @@ const Login = (login) => {
             placeholder="1234"
           />
           <p className="text-red-500 text-xs italic">
-            Don't forget your User ID.
+            Don't forget your Username and User ID.
           </p>
         </div>
         <div className="flex items-center justify-center">
