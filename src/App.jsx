@@ -74,13 +74,13 @@ if (count < 2 && limit < 2) {
           <div>
             <ul className="text-base flex flex-row items-baseline p-3 md:p-0 mt-4 md:gap-8 space-x-4 m-0">
               <li>
-                <a
-                  href="/"
+                <Link
+                  to={"/?page=1"}
                   className="text-lg max-sm:text-base text-gray-900 hover:text-blue-700 dark:text-blue-500 dark:hover:text-white"
                   aria-current="page"
                 >
                   Books
-                </a>
+                </Link>
               </li>
               <li>
                 {user ? (
