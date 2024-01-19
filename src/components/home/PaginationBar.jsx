@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 export default function PaginationBar({ currentPage, totalPage }) {
   const maxPage = Math.min(totalPage, Math.max(currentPage + 4, 10));
   const minPage = Math.max(1, Math.min(currentPage - 5, maxPage - 9));
-  console.log(currentPage);
   const numberedPageItem = [];
 
   for (let page = minPage; page <= maxPage; page++) {

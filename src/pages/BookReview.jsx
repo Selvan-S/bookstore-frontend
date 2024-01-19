@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import API_URL from "../../config/global";
 import BackButton from "../components/BackButton";
 import Spinner from "../components/Spinner";
 
@@ -23,7 +22,7 @@ const BookReview = (user) => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`${API_URL}/books/id/${id}`)
+      .get(`${import.meta.env.VITE_VERCEL_API_URL}/books/id/${id}`)
       .then((response) => {
         setBook(response.data[0]);
         setLoading(false);
@@ -35,7 +34,7 @@ const BookReview = (user) => {
   }, [id]);
   const deleteReview = (reviewId, index) => {
     axios
-      .delete(`${API_URL}/review/${reviewId}`, {
+      .delete(`${import.meta.env.VITE_VERCEL_API_URL}/review/${reviewId}`, {
         data: { user_id: user.user.id },
       })
       .then((response) => {

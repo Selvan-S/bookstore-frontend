@@ -2,7 +2,6 @@ import axios from "axios";
 import { useSnackbar } from "notistack";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import API_URL from "../../config/global";
 import BackButton from "../components/BackButton";
 import Spinner from "../components/Spinner";
 
@@ -15,7 +14,7 @@ const DeleteBook = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`${API_URL}/books/${id}`)
+      .get(`${import.meta.env.VITE_VERCEL_API_URL}/books/${id}`)
       .then((response) => {
         setBook(response.data);
         setLoading(false);
@@ -28,7 +27,7 @@ const DeleteBook = () => {
   const handleDeleteBook = () => {
     setLoading(true);
     axios
-      .delete(`${API_URL}/books/${id}`)
+      .delete(`${import.meta.env.VITE_VERCEL_API_URL}/books/${id}`)
       .then(() => {
         setLoading(false);
         enqueueSnackbar("Book is Deleted successfully", { variant: "success" });
@@ -47,7 +46,6 @@ const DeleteBook = () => {
       <h1 className="text-3xl mt-4">Delete Book</h1>
       {loading ? Spinner : ""}
       <div className="flex flex-col items-center border-2 border-sky-400 rounded-xl sm:w-[600px] w-[328px] p-8 mx-auto mt-10">
-        <h3 className="text-2xl"></h3>
         <div className="my-4">
           <span className="text-2xl mr-4 text-gray-500">TITLE</span>
           <span className="text-2xl">{book.title}</span>

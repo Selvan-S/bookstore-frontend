@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import API_URL from "../../config/global";
 import BackButton from "../components/BackButton";
 import Spinner from "../components/Spinner";
 
@@ -13,7 +12,7 @@ const ShowBook = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`${API_URL}/books/${id}`)
+      .get(`${import.meta.env.VITE_VERCEL_API_URL}/books/${id}`)
       .then((response) => {
         setBook(response.data);
         setLoading(false);
