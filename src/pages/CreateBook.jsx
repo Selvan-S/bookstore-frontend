@@ -2,7 +2,6 @@ import axios from "axios";
 import { useSnackbar } from "notistack";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import API_URL from "../../config/global";
 import BackButton from "../components/BackButton";
 import Spinner from "../components/Spinner";
 
@@ -25,7 +24,7 @@ const CreateBook = ({ user }) => {
     };
     setLoading(true);
     axios
-      .post(`${API_URL}/books`, data)
+      .post(`${import.meta.env.VITE_VERCEL_API_URL}/books`, data)
       .then(() => {
         setLoading(false);
         enqueueSnackbar("Book Created successfully", { variant: "success" });

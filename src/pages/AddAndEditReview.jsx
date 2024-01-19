@@ -2,7 +2,6 @@ import axios from "axios";
 import { useState } from "react";
 import { BsArrowLeft } from "react-icons/bs";
 import { Link, useLocation, useParams } from "react-router-dom";
-import API_URL from "../../config/global";
 import Spinner from "../components/Spinner";
 
 const AddAndEditReview = (user) => {
@@ -36,7 +35,7 @@ const AddAndEditReview = (user) => {
       setLoading(true);
 
       axios
-        .put(`${API_URL}/review`, data)
+        .put(`${import.meta.env.VITE_VERCEL_API_URL}/review`, data)
         .then((response) => {
           setSubmitted(true);
           setLoading(true);
@@ -47,7 +46,7 @@ const AddAndEditReview = (user) => {
     } else {
       setLoading(true);
       axios
-        .post(`${API_URL}/review`, data)
+        .post(`${import.meta.env.VITE_VERCEL_API_URL}/review`, data)
         .then((response) => {
           setSubmitted(true);
           setLoading(true);

@@ -2,7 +2,6 @@ import axios from "axios";
 import { useSnackbar } from "notistack";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import API_URL from "../../config/global";
 import BackButton from "../components/BackButton";
 import Spinner from "../components/Spinner";
 
@@ -21,7 +20,7 @@ const EditBook = ({ user }) => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`${API_URL}/books/${id}`)
+      .get(`${import.meta.env.VITE_VERCEL_API_URL}/books/${id}`)
       .then((response) => {
         setTitle(response.data.title);
         setAuthor(response.data.author);
@@ -49,7 +48,7 @@ const EditBook = ({ user }) => {
     };
     setLoading(true);
     axios
-      .put(`${API_URL}/books/${id}`, data)
+      .put(`${import.meta.env.VITE_VERCEL_API_URL}/books/${id}`, data)
       .then(() => {
         setLoading(false);
         enqueueSnackbar("Book is Edited successfully", { variant: "success" });

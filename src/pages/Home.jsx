@@ -2,7 +2,6 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { MdOutlineAddBox } from "react-icons/md";
 import { Link, useSearchParams } from "react-router-dom";
-import API_URL from "../../config/global";
 import Spinner from "../components/Spinner";
 import BookCards from "../components/home/BookCards";
 import BooksTable from "../components/home/BooksTable";
@@ -28,7 +27,9 @@ const Home = ({ user }) => {
       setLoading(true);
       await axios
         .get(
-          `${API_URL}/books?${searchBy}=${defaultQuery}&page=${searchPage - 1}`
+          `${
+            import.meta.env.VITE_VERCEL_API_URL
+          }/books?${searchBy}=${defaultQuery}&page=${searchPage - 1}`
         )
         .then((response) => {
           setBooks(response.data.books);
