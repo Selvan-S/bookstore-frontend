@@ -13,12 +13,13 @@ const BookSingleCard = ({ book, user }) => {
   return (
     <div
       key={book._id}
-      className="border-2 border-gray-500 rounded-lg px-4 py-2 m-4 relative hover:shadow-xl"
+      className="border-2 border-gray-500 rounded-lg px-3 py-2 m-4 relative hover:shadow-xl"
     >
-      <h2 className="absolute top-1 right-2 px-4 py-1 bg-red-300 rounded-lg">
-        {book.publishYear}
+      <h2 className="absolute top-1 right-2 px-5 py-2 flex items-center gap-1 text-sm text-gray-900  border focus:outline-none focus:ring-4  font-medium bg-red-300 dark:gray-900 border-gray-600 hover:border-gray-600 focus:ring-gray-700 rounded-lg">
+        <span className="text-xs text-gray-900 dark:gray-900">
+          {book.publishYear}
+        </span>
       </h2>
-      <h4 className="my-2 text-gray-500">{book._id}</h4>
       <div className="flex justify-start items-center gap-x-2">
         <PiBookOpenTextLight className="text-red-300 text-2xl" />
         <h2 className="my-1">{book.title}</h2>
@@ -28,39 +29,55 @@ const BookSingleCard = ({ book, user }) => {
         <h2 className="my-1">{book.author}</h2>
       </div>
 
-      <div className="flex justify-between items-center gap-x-2 mt-4 p-4">
-        <BiShow
-          className="text-2xl text-blue-800 hover:text-black cursor-pointer"
+      <div className="flex justify-between items-center mt-4 py-4 px-0">
+        <button
+          className="flex items-center gap-1 text-xs text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-full dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700 py-2 px-2"
           onClick={() => setShowModal(true)}
-        />
+        >
+          <BiShow className="text-xs text-gray-900 dark:text-white cursor-pointer" />
+          Show
+        </button>
         <Link to={`/books/` + book._id}>
-          <MdOutlineReviews className="text-2xl text-green-800" />
+          <button className="flex items-center gap-1 text-xs text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-full dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700 py-2 px-2">
+            <MdOutlineReviews className="text-xs text-gray-900 dark:text-white" />
+            Review
+          </button>
         </Link>
         <Link to={`/books/details/${book._id}`}>
-          <BsInfoCircle className="text-2xl text-green-800 hover:text-black" />
+          <button className="flex items-center gap-1 text-xs text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-full dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700 py-2 px-2">
+            <BsInfoCircle className="text-xs text-gray-900 dark:text-white" />
+            Info
+          </button>
         </Link>
-        {/* <Link to={`/books/edit/${book._id}`}>
-          <AiOutlineEdit className="text-2xl text-yellow-600 hover:text-black" />
-        </Link>
-        <Link to={`/books/delete/${book._id}`}>
-          <MdOutlineDelete className="text-2xl text-red-600 hover:text-black" />
-        </Link> */}
+
         {user ? (
           <>
             {book.userId === user.id && book.userName === user.name && (
-              <div className="flex gap-x-14">
+              <div className="flex">
                 <Link to={`/books/edit/${book._id}`}>
-                  <AiOutlineEdit className="text-2xl text-yellow-600" />
+                  <button className="flex items-center gap-1 text-xs text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-full dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700 py-2 px-2">
+                    <AiOutlineEdit className="text-xs text-gray-900 dark:text-white" />
+                    Edit
+                  </button>
                 </Link>
                 <Link to={`/books/delete/${book._id}`}>
-                  <MdOutlineDelete className="text-2xl text-red-600" />
+                  <button className="flex items-center gap-1 text-xs text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-full dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700 py-2 px-2 absolute top-10 right-2">
+                    <MdOutlineDelete className="text-sm text-gray-900 dark:text-white" />
+                    Delete
+                  </button>
                 </Link>
               </div>
             )}
           </>
         ) : (
           <Link to={"/login"}>
-            <AiOutlineLogin className="text-2xl text-yellow-600" />
+            <button
+              type="button"
+              className="flex items-center gap-1 text-xs text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-full dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700 py-2 px-2"
+            >
+              <AiOutlineLogin className="text-xs text-gray-900 dark:text-white" />
+              Log in
+            </button>
           </Link>
         )}
       </div>

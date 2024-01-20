@@ -6,22 +6,21 @@ import Spinner from "../components/Spinner";
 import BookCards from "../components/home/BookCards";
 import BooksTable from "../components/home/BooksTable";
 import PaginationBar from "../components/home/PaginationBar";
+import Search from "../components/home/Search";
 
 const Home = ({ user }) => {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showType, setShowType] = useState("card");
 
-  const [searchTitle, setSearchTitle] = useState("");
-  const [searchAuthor, setSearchAuthor] = useState("");
-  const [searchPublishYear, setSearchPublishYear] = useState("");
-  const [searchBy, setSearchBy] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchBy, setSearchBy] = useState("title");
   const [defaultQuery, setDefaultQuery] = useState("");
-
   const [totalItemCount, setTotalItemCount] = useState("");
   const totalPages = Math.ceil(totalItemCount / 6);
   const [searchParams, setSearchParams] = useSearchParams();
   let searchPage = searchParams.get("page") || 1;
+
   useEffect(() => {
     async function retrieveBooks() {
       setLoading(true);
@@ -42,185 +41,92 @@ const Home = ({ user }) => {
         });
     }
     retrieveBooks();
-  }, [searchParams, searchBy, defaultQuery]);
+  }, [searchParams, defaultQuery]);
 
-  const findByTitle = (event) => {
+  const querySubmitHandle = (event) => {
     event.preventDefault();
-    setSearchBy("title");
-    setDefaultQuery(searchTitle);
-    setSearchTitle("");
-  };
-
-  const findByAuthor = (event) => {
-    event.preventDefault();
-    setSearchBy("author");
-    setDefaultQuery(searchAuthor);
-    setSearchAuthor("");
-  };
-
-  const findByPublishYear = (event) => {
-    event.preventDefault();
-    setSearchBy("publishYear");
-    setDefaultQuery(searchPublishYear);
-    setSearchPublishYear("");
+    setDefaultQuery(searchQuery);
+    setSearchQuery("");
   };
 
   return (
     <div className="p-4 max-w-screen-xl mx-auto">
-      <div className="flex justify-center items-center gap-x-4">
-        <button
-          className="bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg"
-          onClick={() => setShowType("table")}
-        >
-          Table
-        </button>
-        <button
-          className="bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg"
-          onClick={() => setShowType("card")}
-        >
-          Card
-        </button>
-      </div>
-      <div className="flex max-sm:flex-col flex-wrap mt-8 gap-4 justify-center">
-        <form onSubmit={findByTitle}>
-          <label
-            htmlFor="title-search"
-            className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
-          >
-            Search
-          </label>
-          <div className="relative">
-            <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-              <svg
-                className="w-4 h-4 text-gray-500 dark:text-gray-400"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 20 20"
-              >
-                <path
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-                />
-              </svg>
-            </div>
-            <input
-              type="text"
-              id="title-search"
-              name="title-search"
-              aria-label="Title Search"
-              value={searchTitle}
-              onChange={(e) => setSearchTitle(e.target.value)}
-              className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              placeholder="E.g. Dark Matter, ..."
-            />
-            <button
-              type="submit"
-              value="Submit"
-              className="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+      <div className="flex sm:justify-between sm:flex-row-reverse sm:items-center sm:mx-4 sm:gap-x-4 gap-y-4  flex-col justify-end items-end ">
+        <form onSubmit={querySubmitHandle}>
+          <div className="flex">
+            <label
+              htmlFor="search-dropdown"
+              className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
             >
-              Search
-            </button>
-          </div>
-        </form>
-        <form onSubmit={findByAuthor}>
-          <label
-            htmlFor="author-search"
-            className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
-          >
-            Search
-          </label>
-          <div className="relative">
-            <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-              <svg
-                className="w-4 h-4 text-gray-500 dark:text-gray-400"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 20 20"
-              >
-                <path
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-                />
-              </svg>
-            </div>
-            <input
-              type="text"
-              id="author-search"
-              name="author-search"
-              aria-label="Author Search"
-              value={searchAuthor}
-              onChange={(e) => setSearchAuthor(e.target.value)}
-              className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              placeholder="E.g. Blake crouch, ..."
+              selvan0023@gmail.com
+            </label>
+            <Search
+              search={(filter) => {
+                setSearchBy(filter);
+              }}
             />
-            <button
-              type="submit"
-              value="Submit"
-              className="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            >
-              Search
-            </button>
+
+            <div className="relative w-full">
+              <input
+                type="search"
+                id="search-dropdown"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="block p-2.5 w-full z-20 text-xs sm:text-sm text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50 border-s-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-s-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
+                placeholder="Search E.L.James, Nancy katyal, 2011..."
+              />
+              <button
+                type="submit"
+                className="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-blue-700 rounded-e-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              >
+                <svg
+                  className="w-4 h-4"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                  />
+                </svg>
+                <span className="sr-only">Search</span>
+              </button>
+            </div>
           </div>
         </form>
 
-        <form onSubmit={findByPublishYear}>
+        <div className="flex gap-x-4">
           <label
-            htmlFor="title-search"
-            className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
+            htmlFor="list-view"
+            className="block mb-2 text-sm font-medium text-gray-900 sr-only"
           >
-            Search
+            Select an List view
           </label>
-          <div className="relative">
-            <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-              <svg
-                className="w-4 h-4 text-gray-500 dark:text-gray-400"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 20 20"
-              >
-                <path
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-                />
-              </svg>
-            </div>
-            <input
-              type="text"
-              id="title-search"
-              name="title-search"
-              aria-label="Title Search"
-              value={searchPublishYear}
-              onChange={(e) => setSearchPublishYear(e.target.value)}
-              className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              placeholder="E.g. 2016, ..."
-            />
-            <button
-              type="submit"
-              value="Submit"
-              className="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            >
-              Search
-            </button>
-          </div>
-        </form>
+          <select
+            id="list-view"
+            className="text-xs bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-24 sm:w-32 p-2 sm:p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          >
+            <option onClick={() => setShowType("card")} value="card" selected>
+              Card view
+            </option>
+            <option onClick={() => setShowType("table")} value="table">
+              Table view
+            </option>
+          </select>
+        </div>
       </div>
-      <div className="flex justify-between items-center">
-        <h1 className="text-3xl my-8">Books List</h1>
+
+      <div className="flex justify-between items-center mx-4">
+        <h1 className=" text-2xl sm:text-3xl my-8">Books List</h1>
+
         <div className="my-4"></div>
         <Link to="/books/create">
-          <MdOutlineAddBox className="text-sky-800 text-5xl" />
+          <MdOutlineAddBox className="text-sky-800 text-4xl sm:text-5xl" />
         </Link>
       </div>
       {loading ? (

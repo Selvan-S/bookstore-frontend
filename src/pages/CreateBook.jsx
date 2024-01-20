@@ -11,14 +11,15 @@ const CreateBook = ({ user }) => {
   const [publishYear, setPublishYear] = useState("");
   const [about, setAbout] = useState("");
   const [loading, setLoading] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(false);
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
   const handleSaveBook = () => {
     const data = {
-      title,
-      author,
-      publishYear,
-      about,
+      title: title.trim(),
+      author: author.trim(),
+      publishYear: publishYear.trim(),
+      about: about.trim(),
       userId: user.id,
       userName: user.name,
     };
@@ -48,8 +49,11 @@ const CreateBook = ({ user }) => {
         {user ? (
           <div>
             <div className="my-4">
-              <label className="text-xl mr-4 text-gray-500">Title</label>
+              <label htmlFor="title" className="text-xl mr-4 text-gray-500">
+                Title
+              </label>
               <input
+                id="title"
                 placeholder="title"
                 type="text"
                 value={title}
@@ -58,8 +62,11 @@ const CreateBook = ({ user }) => {
               />
             </div>
             <div className="my-4">
-              <label className="text-xl mr-4 text-gray-500">Author</label>
+              <label htmlFor="author" className="text-xl mr-4 text-gray-500">
+                Author
+              </label>
               <input
+                id="author"
                 placeholder="author"
                 type="text"
                 value={author}
@@ -68,8 +75,14 @@ const CreateBook = ({ user }) => {
               />
             </div>
             <div className="my-4">
-              <label className="text-xl mr-4 text-gray-500">Publish Year</label>
+              <label
+                htmlFor="publishYear"
+                className="text-xl mr-4 text-gray-500"
+              >
+                Publish Year
+              </label>
               <input
+                id="publishYear"
                 placeholder="year"
                 type="text"
                 value={publishYear}
@@ -78,7 +91,9 @@ const CreateBook = ({ user }) => {
               />
             </div>
             <div className="my-4">
-              <label className="text-xl mr-4 text-gray-500">About book</label>
+              <label htmlFor="about" className="text-xl mr-4 text-gray-500">
+                About book
+              </label>
               <textarea
                 placeholder="About this book! (optional)"
                 name="about"
@@ -92,7 +107,11 @@ const CreateBook = ({ user }) => {
             </div>
             <button
               className="w-full p-2 bg-sky-300 my-4"
-              onClick={handleSaveBook}
+              onClick={() => {
+                setIsDisabled(true);
+                handleSaveBook();
+              }}
+              disabled={isDisabled}
             >
               Save
             </button>

@@ -13,6 +13,7 @@ const EditBook = ({ user }) => {
   const [userName, setUserName] = useState("");
   const [about, setAbout] = useState("");
   const [loading, setLoading] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(false);
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
 
@@ -37,12 +38,12 @@ const EditBook = ({ user }) => {
         console.log(error);
       });
   }, []);
-  const handleEditBook = ({ user }) => {
+  const handleEditBook = () => {
     const data = {
-      title,
-      author,
-      publishYear,
-      about,
+      title: title.trim(),
+      author: author.trim(),
+      publishYear: publishYear.trim(),
+      about: about.trim(),
       userId: user.id,
       userName: user.name,
     };
@@ -115,7 +116,11 @@ const EditBook = ({ user }) => {
               </div>
               <button
                 className="w-full p-2 bg-sky-300 my-4"
-                onClick={handleEditBook}
+                onClick={() => {
+                  setIsDisabled(true);
+                  handleEditBook();
+                }}
+                disabled={isDisabled}
               >
                 Save
               </button>
