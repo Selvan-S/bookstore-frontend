@@ -79,7 +79,7 @@ if (count < 2 && limit < 2) {
                   className="text-lg max-sm:text-base text-gray-900 hover:text-blue-700 dark:text-blue-500 dark:hover:text-white"
                   aria-current="page"
                 >
-                  Books
+                  Home
                 </Link>
               </li>
               <li>

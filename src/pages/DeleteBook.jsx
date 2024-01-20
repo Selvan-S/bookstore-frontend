@@ -11,6 +11,7 @@ const DeleteBook = () => {
   const { id } = useParams();
   const [book, setBook] = useState({});
   const { enqueueSnackbar } = useSnackbar();
+  const [isDisabled, setIsDisabled] = useState(false);
   useEffect(() => {
     setLoading(true);
     axios
@@ -56,7 +57,11 @@ const DeleteBook = () => {
 
         <button
           className="p-4 bg-red-600 text-white m-8 w-full"
-          onClick={handleDeleteBook}
+          onClick={() => {
+            setIsDisabled(true);
+            handleDeleteBook();
+          }}
+          disabled={isDisabled}
         >
           Yes, Delete it
         </button>

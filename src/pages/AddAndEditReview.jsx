@@ -17,14 +17,21 @@ const AddAndEditReview = (user) => {
   const [review, setReview] = useState(initialReviewState);
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(true);
 
   const { id } = useParams();
   const handleInputChange = (event) => {
-    setReview(event.target.value);
+    if (!event.target.value) {
+      setIsDisabled(true);
+      setReview("");
+    } else {
+      setReview(event.target.value);
+      setIsDisabled(false);
+    }
   };
   const saveReview = () => {
     let data = {
-      text: review,
+      text: review.trim(),
       name: user.user.name,
       user_id: user.user.id,
       book_id: id,
@@ -36,7 +43,7 @@ const AddAndEditReview = (user) => {
 
       axios
         .put(`${import.meta.env.VITE_VERCEL_API_URL}/review`, data)
-        .then((response) => {
+        .then(() => {
           setSubmitted(true);
           setLoading(true);
         })
@@ -47,7 +54,7 @@ const AddAndEditReview = (user) => {
       setLoading(true);
       axios
         .post(`${import.meta.env.VITE_VERCEL_API_URL}/review`, data)
-        .then((response) => {
+        .then(() => {
           setSubmitted(true);
           setLoading(true);
         })
@@ -84,7 +91,9 @@ const AddAndEditReview = (user) => {
               </div>
             ) : (
               <div className="my-4">
-                <label className="text-xl text-gray-500">Reivew</label>
+                <label htmlFor="text" className="text-xl text-gray-500">
+                  Reivew
+                </label>
                 <input
                   type="text"
                   id="text"
@@ -95,7 +104,11 @@ const AddAndEditReview = (user) => {
                 />
                 <button
                   className="p-2 bg-sky-300 mt-4 rounded-lg"
-                  onClick={saveReview}
+                  onClick={() => {
+                    setIsDisabled(true);
+                    saveReview();
+                  }}
+                  disabled={isDisabled}
                 >
                   Submit
                 </button>

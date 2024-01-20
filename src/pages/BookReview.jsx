@@ -37,7 +37,7 @@ const BookReview = (user) => {
       .delete(`${import.meta.env.VITE_VERCEL_API_URL}/review/${reviewId}`, {
         data: { user_id: user.user.id },
       })
-      .then((response) => {
+      .then(() => {
         setBook((prevState) => {
           prevState.reviews.splice(index, 1);
           return {
@@ -109,12 +109,12 @@ const BookReview = (user) => {
                         {new Date(review.updatedAt).toString()}
                         {user.user && user.user.id === review.user_id && (
                           <div className="flex justify-around mt-4 mb-2">
-                            <a
+                            <button
                               onClick={() => deleteReview(review._id, index)}
                               className="bg-sky-800 text-white px-4 py-1 rounded-lg w-fit text-base cursor-pointer"
                             >
                               Delete
-                            </a>
+                            </button>
                             <Link
                               to={{
                                 pathname: "/books/" + id + "/review",
