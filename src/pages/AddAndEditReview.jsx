@@ -4,7 +4,7 @@ import { BsArrowLeft } from "react-icons/bs";
 import { Link, useLocation, useParams } from "react-router-dom";
 import Spinner from "../components/Spinner";
 
-const AddAndEditReview = (user) => {
+const AddAndEditReview = ({ user, isDark }) => {
   let initialReviewState = "";
 
   let editing = false;
@@ -13,7 +13,6 @@ const AddAndEditReview = (user) => {
     editing = true;
     initialReviewState = state.currentReview.text;
   }
-
   const [review, setReview] = useState(initialReviewState);
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -32,8 +31,9 @@ const AddAndEditReview = (user) => {
   const saveReview = () => {
     let data = {
       text: review.trim(),
-      name: user.user.name,
-      user_id: user.user.id,
+
+      name: user.name,
+      user_id: user.id,
       book_id: id,
     };
 
@@ -76,11 +76,15 @@ const AddAndEditReview = (user) => {
       <h1 className="text-3xl mt-4">{editing ? "Edit " : "Create "}Review</h1>
       {loading ? Spinner : ""}
       <div className="flex flex-col border-2 border-sky-400 rounded-xl sm:w-[600px] w-[328px] p-4 mx-auto mt-10">
-        {user.user ? (
+        {user ? (
           <div>
             {submitted ? (
               <div>
-                <h4 className="text-xl text-gray-700">
+                <h4
+                  className={`${
+                    isDark ? "text-gray-500" : "text-gray-700"
+                  } text-xl`}
+                >
                   Your submission has been successfully completed !
                 </h4>
                 <button className="p-2 bg-sky-700 mt-4 rounded-lg">
@@ -100,10 +104,15 @@ const AddAndEditReview = (user) => {
                   placeholder="Kindly share your valuable review here..."
                   value={review}
                   onChange={handleInputChange}
-                  className="border-2 border-gray-500 px-4 py-2 mt-4 w-full"
+                  className={`${
+                    isDark
+                      ? "bg-gray-700 text-white border-gray-600 placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500"
+                      : "border-gray-300 text-gray-900 bg-gray-50 focus:ring-primary-600 focus:border-primary-600"
+                  }  border  sm:text-sm rounded-lg  block w-full p-2.5`}
                 />
                 <button
-                  className="p-2 bg-sky-300 mt-4 rounded-lg"
+
+                  className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-2"
                   onClick={() => {
                     setIsDisabled(true);
                     saveReview();

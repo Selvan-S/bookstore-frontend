@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import BackButton from "../components/BackButton";
 import Spinner from "../components/Spinner";
+import DateFormat from "../components/DateFormat";
 
 const ShowBook = () => {
   const [book, setBook] = useState({});
@@ -29,11 +30,7 @@ const ShowBook = () => {
       {loading ? (
         <Spinner />
       ) : (
-        <div className="flex flex-col border-2 border-sky-400 rounded-xl w-fit p4 mx-auto mt-10">
-          <div className="my-4 px-4">
-            <span className="text-xl mr-4 text-gray-500">ID</span>
-            <span>{book._id}</span>
-          </div>
+        <div className="flex flex-col border-2 border-sky-800 rounded-xl max-w-96 p4 mx-auto mt-10">
           <div className="my-4 px-4">
             <span className="text-xl mr-4 text-gray-500">Title</span>
             <span>{book.title}</span>
@@ -60,12 +57,13 @@ const ShowBook = () => {
             </div>
           )}
           <div className="my-4 px-4">
-            <span className="text-xl mr-4 text-gray-500">Created Time</span>
-            <span>{new Date(book.createdAt).toString()}</span>
-          </div>
-          <div className="my-4 px-4">
-            <span className="text-xl mr-4 text-gray-500">Last Update Time</span>
-            <span>{new Date(book.updatedAt).toString()}</span>
+            <span className="text-xl mr-4 text-gray-500">
+              {" "}
+              <DateFormat
+                createdAt={book.createdAt}
+                updatedAt={book.updatedAt}
+              />
+            </span>
           </div>
         </div>
       )}
