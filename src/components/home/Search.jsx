@@ -1,6 +1,8 @@
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon } from "@heroicons/react/20/solid";
+
 import { Fragment, useEffect, useState } from "react";
+
 
 const searchBy = [
   {
@@ -21,11 +23,14 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
+
 export default function Search({ search, mode }) {
+
   const [selected, setSelected] = useState(searchBy[0]);
   const searchFilter = (filter) => {
     search(filter);
   };
+
   const [isDark, setIsDark] = useState(true);
   useEffect(() => {
     setIsDark(mode);
@@ -35,6 +40,7 @@ export default function Search({ search, mode }) {
     <Listbox value={selected} onChange={setSelected}>
       {({ open }) => (
         <div className="relative">
+
           <Listbox.Button
             className={`${
               isDark
@@ -71,6 +77,7 @@ export default function Search({ search, mode }) {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
+
             <Listbox.Options
               className={`${
                 isDark
@@ -85,6 +92,7 @@ export default function Search({ search, mode }) {
                   className={({ active }) =>
                     classNames(
                       active
+
                         ? `${
                             isDark
                               ? "bg-gray-600 text-white"

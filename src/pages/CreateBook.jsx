@@ -57,6 +57,7 @@ const CreateBook = ({ user, createMode }) => {
         {user ? (
           <div>
             <div className="my-4">
+
               {alert && (
                 <div
                   className="flex gap-2 bg-red-100 border border-red-400 text-red-700 px-4 py-1 rounded relative mb-1"
@@ -89,6 +90,7 @@ const CreateBook = ({ user, createMode }) => {
               />
             </div>
             <div className="my-4">
+
               <label
                 htmlFor="author"
                 className={`${
@@ -114,6 +116,7 @@ const CreateBook = ({ user, createMode }) => {
             <div className="my-4">
               <label
                 htmlFor="publishYear"
+
                 className={`${
                   createMode ? "text-gray-400" : "text-gray-500"
                 } text-xl text-gray-500`}
@@ -135,6 +138,7 @@ const CreateBook = ({ user, createMode }) => {
               />
             </div>
             <div className="my-4">
+
               <label
                 htmlFor="about"
                 className={`${

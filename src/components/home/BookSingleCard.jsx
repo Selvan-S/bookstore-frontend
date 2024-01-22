@@ -21,6 +21,7 @@ const BookSingleCard = ({ book, user, singleCardMode }) => {
       className="border-2 border-gray-500 rounded-lg px-3 py-2 m-4 relative hover:shadow-xl"
     >
       <h2 className="absolute top-1 right-2 px-5 py-2 flex items-center gap-1 text-sm text-gray-900  border focus:outline-none focus:ring-4  font-medium bg-red-300 dark:gray-900 border-gray-600 hover:border-gray-600 focus:ring-gray-700 rounded-lg">
+
         <span className={`text-gray-900 text-xs `}>
           <strong>{book.publishYear}</strong>
         </span>
@@ -36,6 +37,7 @@ const BookSingleCard = ({ book, user, singleCardMode }) => {
 
       <div className="flex justify-between items-center mt-4 py-4 px-0">
         <button
+
           className={`${
             isDark
               ? "text-white bg-gray-800 border-gray-600 hover:bg-gray-700 hover:border-gray-600 focus:ring-gray-700"
@@ -67,6 +69,7 @@ const BookSingleCard = ({ book, user, singleCardMode }) => {
           </button>
         </Link>
         <Link to={`/books/details/${book._id}`}>
+
           <button
             className={`${
               isDark
@@ -88,6 +91,7 @@ const BookSingleCard = ({ book, user, singleCardMode }) => {
             {book.userId === user.id && book.userName === user.name && (
               <div className="flex">
                 <Link to={`/books/edit/${book._id}`}>
+
                   <button
                     className={`${
                       isDark
@@ -104,6 +108,7 @@ const BookSingleCard = ({ book, user, singleCardMode }) => {
                   </button>
                 </Link>
                 <Link to={`/books/delete/${book._id}`}>
+
                   <button
                     className={`${
                       isDark
@@ -126,6 +131,7 @@ const BookSingleCard = ({ book, user, singleCardMode }) => {
           <Link to={"/login"}>
             <button
               type="button"
+
               className={`${
                 isDark
                   ? "text-white bg-gray-800 border-gray-600 hover:bg-gray-700 hover:border-gray-600 focus:ring-gray-700"

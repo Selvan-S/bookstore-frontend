@@ -31,6 +31,7 @@ const AddAndEditReview = ({ user, isDark }) => {
   const saveReview = () => {
     let data = {
       text: review.trim(),
+
       name: user.name,
       user_id: user.id,
       book_id: id,
@@ -110,6 +111,7 @@ const AddAndEditReview = ({ user, isDark }) => {
                   }  border  sm:text-sm rounded-lg  block w-full p-2.5`}
                 />
                 <button
+
                   className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-2"
                   onClick={() => {
                     setIsDisabled(true);
