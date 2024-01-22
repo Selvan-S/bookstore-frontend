@@ -8,7 +8,7 @@ import BooksTable from "../components/home/BooksTable";
 import PaginationBar from "../components/home/PaginationBar";
 import Search from "../components/home/Search";
 
-const Home = ({ user }) => {
+const Home = ({ user, appMode }) => {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showType, setShowType] = useState("card");
@@ -20,6 +20,8 @@ const Home = ({ user }) => {
   const totalPages = Math.ceil(totalItemCount / 6);
   const [searchParams, setSearchParams] = useSearchParams();
   let searchPage = searchParams.get("page") || 1;
+
+  const [isDark, setIsDark] = useState(true);
 
   useEffect(() => {
     async function retrieveBooks() {
@@ -42,7 +44,9 @@ const Home = ({ user }) => {
     }
     retrieveBooks();
   }, [searchParams, defaultQuery]);
-
+  useEffect(() => {
+    setIsDark(appMode);
+  }, [appMode]);
   const querySubmitHandle = (event) => {
     event.preventDefault();
     setDefaultQuery(searchQuery);
@@ -56,7 +60,9 @@ const Home = ({ user }) => {
           <div className="flex">
             <label
               htmlFor="search-dropdown"
-              className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
+              className={`${
+                isDark ? "text-white" : "text-gray-900"
+              } mb-2 text-sm font-medium  sr-only dark:`}
             >
               selvan0023@gmail.com
             </label>
@@ -64,6 +70,7 @@ const Home = ({ user }) => {
               search={(filter) => {
                 setSearchBy(filter);
               }}
+              mode={isDark}
             />
 
             <div className="relative w-full">
@@ -72,12 +79,20 @@ const Home = ({ user }) => {
                 id="search-dropdown"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="block p-2.5 w-full z-20 text-xs sm:text-sm text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50 border-s-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-s-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
+                className={`${
+                  isDark
+                    ? "bg-gray-700 border-s-gray-700  border-gray-600 placeholder-gray-400 text-white focus:border-blue-500"
+                    : "text-gray-900 border-gray-300 focus:ring-blue-500 focus:border-blue-500  bg-gray-50"
+                } block p-2.5 w-full z-20 text-xs sm:text-sm  rounded-e-lg border-s-gray-50 border-s-2 border`}
                 placeholder="Search E.L.James, Nancy katyal, 2011..."
               />
               <button
                 type="submit"
-                className="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-blue-700 rounded-e-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                className={`${
+                  isDark
+                    ? "bg-blue-600 hover:bg-blue-700 focus:ring-blue-800"
+                    : "focus:ring-blue-300 hover:bg-blue-800 bg-blue-700"
+                } absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white rounded-e-lg border border-blue-700  focus:ring-4 focus:outline-none `}
               >
                 <svg
                   className="w-4 h-4"
@@ -109,12 +124,22 @@ const Home = ({ user }) => {
           </label>
           <select
             id="list-view"
-            className="text-xs bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-24 sm:w-32 p-2 sm:p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            onChange={({ target }) => {
+              setShowType(target.value);
+            }}
+            className={`${
+              isDark
+                ? "bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
+                : "text-gray-900 bg-gray-50 border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+            } text-xs  border  sm:text-sm rounded-lg  block w-24 sm:w-32 p-2 sm:p-2.5 `}
           >
-            <option onClick={() => setShowType("card")} value="card" selected>
-              Card view
+            <option value="card" defaultValue={"card"}>
+              Cards view
             </option>
-            <option onClick={() => setShowType("table")} value="table">
+            <option
+              // onClick={() => setShowType("table")}
+              value="table"
+            >
               Table view
             </option>
           </select>
@@ -134,10 +159,14 @@ const Home = ({ user }) => {
       ) : showType === "table" ? (
         <BooksTable books={books} user={user} />
       ) : (
-        <BookCards books={books} user={user} />
+        <BookCards books={books} user={user} cardsMode={isDark} />
       )}
 
-      <PaginationBar currentPage={searchPage} totalPage={totalPages} />
+      <PaginationBar
+        currentPage={searchPage}
+        totalPage={totalPages}
+        paginationMode={isDark}
+      />
     </div>
   );
 };

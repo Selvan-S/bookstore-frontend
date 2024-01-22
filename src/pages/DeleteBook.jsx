@@ -5,7 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import BackButton from "../components/BackButton";
 import Spinner from "../components/Spinner";
 
-const DeleteBook = () => {
+const DeleteBook = ({ user }) => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { id } = useParams();
@@ -46,26 +46,39 @@ const DeleteBook = () => {
       <BackButton />
       <h1 className="text-3xl mt-4">Delete Book</h1>
       {loading ? Spinner : ""}
-      <div className="flex flex-col items-center border-2 border-sky-400 rounded-xl sm:w-[600px] w-[328px] p-8 mx-auto mt-10">
-        <div className="my-4">
-          <span className="text-2xl mr-4 text-gray-500">TITLE</span>
-          <span className="text-2xl">{book.title}</span>
+      {user ? (
+        <div>
+          {book.userName === user.name && book.userId === user.id ? (
+            <div className="flex flex-col items-center border-2 border-sky-400 rounded-xl max-w-[600px] p-8 mx-auto mt-10 max-sm:mx-5">
+              <div className="my-4">
+                <span className="text-2xl mr-4 text-gray-500">TITLE</span>
+                <span className="text-2xl">{book.title}</span>
+              </div>
+              <h3 className="text-xl">
+                Are you certain you want to delete this book?
+              </h3>
+              <button
+                className="p-4 bg-red-600 text-white m-8 w-full"
+                onClick={() => {
+                  setIsDisabled(true);
+                  handleDeleteBook();
+                }}
+                disabled={isDisabled}
+              >
+                Yes, Delete it
+              </button>
+            </div>
+          ) : (
+            <div className="flex justify-center max-w-[600px] border-2 border-sky-800 rounded-xl p-8 mx-auto mt-10 text-xl max-sm:mx-5">
+              <strong>This book was not created by you.</strong>
+            </div>
+          )}
         </div>
-        <h3 className="text-xl">
-          Are you certain you want to delete this book?
-        </h3>
-
-        <button
-          className="p-4 bg-red-600 text-white m-8 w-full"
-          onClick={() => {
-            setIsDisabled(true);
-            handleDeleteBook();
-          }}
-          disabled={isDisabled}
-        >
-          Yes, Delete it
-        </button>
-      </div>
+      ) : (
+        <div className="flex justify-center max-w-[600px] border-2 border-sky-800 rounded-xl p-8 mx-auto mt-10 text-xl max-sm:mx-5">
+          <strong>Please log in to Delete Book</strong>
+        </div>
+      )}
     </div>
   );
 };

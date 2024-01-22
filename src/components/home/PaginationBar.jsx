@@ -1,8 +1,23 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-export default function PaginationBar({ currentPage, totalPage }) {
-  const maxPage = Math.min(totalPage, Math.max(currentPage + 4, 10));
-  const minPage = Math.max(1, Math.min(currentPage - 5, maxPage - 9));
+export default function PaginationBar({
+  currentPage,
+  totalPage,
+  paginationMode,
+}) {
+  const [currentPageNum, setCurrentPageNum] = useState(1);
+  const [totalPagesNum, setTotalPagesNum] = useState(1);
+  const [isDark, setIsDark] = useState(true);
+  const maxPage = Math.min(totalPagesNum, Math.max(currentPageNum + 4, 10));
+  const minPage = Math.max(1, Math.min(currentPageNum - 5, maxPage - 9));
+  useEffect(() => {
+    setCurrentPageNum(parseInt(currentPage));
+    setTotalPagesNum(parseInt(totalPage));
+  }, [currentPage, totalPage]);
+  useEffect(() => {
+    setIsDark(paginationMode);
+  }, [paginationMode]);
 
   const numberedPageItem = [];
 
@@ -11,15 +26,23 @@ export default function PaginationBar({ currentPage, totalPage }) {
   }
   return (
     <>
-      <div className="sm:flex sm:justify-center sm:items-center sm:gap-2 hidden sm:block my-4">
+      <div className="sm:flex sm:justify-center sm:items-center sm:gap-2 hidden my-4">
         {numberedPageItem.map((pg, i) => (
           <div key={i}>
             <button
-              className={`  ${
-                currentPage == pg
-                  ? "relative h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-lg bg-gray-900 text-center align-middle font-sans text-xs font-medium uppercase text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none pointer-events-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                  : "relative h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-lg text-center align-middle font-sans text-xs font-medium uppercase text-gray-900 transition-all hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-              }`}
+              className={`${
+                currentPageNum == pg
+                  ? `${
+                      isDark
+                        ? "border bg-gray-400 border-gray-700 text-gray-800 hover:bg-gray-700 hover:text-white pointer-events-none"
+                        : "bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none pointer-events-none"
+                    }`
+                  : `${
+                      isDark
+                        ? "border bg-gray-800 border-gray-700 text-gray-400 hover:bg-gray-700 hover:text-white"
+                        : "text-gray-900 hover:bg-gray-900/10 active:bg-gray-900/20"
+                    }`
+              } relative h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-lg text-center align-middle font-sans text-xs font-medium uppercase transition-all disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none`}
               type="button"
             >
               <Link to={"?page=" + pg}>
@@ -32,13 +55,17 @@ export default function PaginationBar({ currentPage, totalPage }) {
         ))}
       </div>
 
-      <div className="flex justify-center items-center gap-8 block sm:hidden my-4">
-        {currentPage > 1 && (
+      <div className="flex justify-center items-center gap-8 sm:hidden my-4">
+        {currentPageNum > 1 && (
           <button
-            className={`relative h-8 max-h-[32px] w-8 max-w-[32px] select-none rounded-lg border border-gray-900 text-center align-middle font-sans text-xs font-medium uppercase text-gray-900 transition-all hover:opacity-75 focus:ring focus:ring-gray-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none`}
+            className={`${
+              isDark
+                ? "bg-gray-800 border border-gray-700 text-gray-400 hover:bg-gray-700 hover:text-white"
+                : "text-gray-900 border border-gray-900"
+            } relative h-8 max-h-[32px] w-8 max-w-[32px] select-none rounded-lg text-center align-middle font-sans text-xs font-medium uppercase  transition-all hover:opacity-75 focus:ring focus:ring-gray-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none`}
             type="button"
           >
-            <Link to={"?page=" + (parseInt(currentPage) - 1)}>
+            <Link to={"?page=" + (currentPageNum - 1)}>
               <span className="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 p-2">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -59,16 +86,30 @@ export default function PaginationBar({ currentPage, totalPage }) {
             </Link>
           </button>
         )}
-        <p className="block font-sans text-base antialiased font-normal leading-relaxed text-gray-700">
-          Page <strong className="text-gray-900">{currentPage}</strong> of{" "}
-          <strong className="text-gray-900">{totalPage}</strong>
+        <p
+          className={`${
+            isDark ? "text-gray-500" : "text-gray-700"
+          } block font-sans text-base antialiased font-normal leading-relaxed`}
+        >
+          Page{" "}
+          <strong className={`${isDark ? "text-white" : "text-gray-900"}`}>
+            {currentPageNum}
+          </strong>{" "}
+          of{" "}
+          <strong className={`${isDark ? "text-white" : "text-gray-900"}`}>
+            {totalPagesNum}
+          </strong>
         </p>
-        {currentPage < totalPage && (
+        {currentPageNum < totalPagesNum && (
           <button
-            className="relative h-8 max-h-[32px] w-8 max-w-[32px] select-none rounded-lg border border-gray-900 text-center align-middle font-sans text-xs font-medium uppercase text-gray-900 transition-all hover:opacity-75 focus:ring focus:ring-gray-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+            className={`${
+              isDark
+                ? "bg-gray-800 border border-gray-700 text-gray-400 hover:bg-gray-700 hover:text-white"
+                : "text-gray-900 border border-gray-900"
+            } relative h-8 max-h-[32px] w-8 max-w-[32px] select-none rounded-lg text-center align-middle font-sans text-xs font-medium uppercase  transition-all hover:opacity-75 focus:ring focus:ring-gray-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none`}
             type="button"
           >
-            <Link to={`?page=${parseInt(currentPage) + 1}`}>
+            <Link to={`?page=${currentPageNum + 1}`}>
               <span className="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 p-2">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

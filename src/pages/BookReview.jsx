@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import BackButton from "../components/BackButton";
+import DateFormat from "../components/DateFormat";
 import Spinner from "../components/Spinner";
 
 const BookReview = (user) => {
@@ -64,20 +65,16 @@ const BookReview = (user) => {
         <Spinner />
       ) : (
         <div>
-          <div className="flex flex-col border-2 border-sky-400 rounded-xl w-fit p4 mt-10">
-            <div className="my-4 px-4">
-              <span className="text-sm mr-4 text-gray-500">ID</span>
-              <span>{bookId}</span>
-            </div>
-            <div className="my-4 px-4">
+          <div className="flex flex-col border-2 border-sky-400 rounded-xl mt-10 max-w-80">
+            <div className="my-4 px-4 flex gap-16">
               <span className="text-sm mr-4 text-gray-500">Title</span>
               <span>{bookTitle}</span>
             </div>
-            <div className="my-4 px-4">
+            <div className="my-4 px-4 flex gap-12">
               <span className="text-sm mr-4 text-gray-500">Author</span>
               <span>{bookAuthor}</span>
             </div>
-            <div className="my-4 px-4">
+            <div className="my-4 px-4 flex gap-4">
               <span className="text-sm mr-4 text-gray-500">Publish Year</span>
               <span>{bookPublishYear}</span>
             </div>
@@ -106,7 +103,14 @@ const BookReview = (user) => {
                         {review.name}
                         <br />
                         <strong className="my-1">Date: </strong>
-                        {new Date(review.updatedAt).toString()}
+                        <span className="text-gray-500">
+                          {" "}
+                          <DateFormat
+                            createdAt={review.createdAt}
+                            updatedAt={review.updatedAt}
+                          />
+                        </span>
+
                         {user.user && user.user.id === review.user_id && (
                           <div className="flex justify-around mt-4 mb-2">
                             <button
