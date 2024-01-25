@@ -9,7 +9,9 @@ import BookModal from "./BookModal";
 
 const BookSingleCard = ({ book, user, singleCardMode }) => {
   const [showModal, setShowModal] = useState(false);
-  const [isDark, setIsDark] = useState(true);
+
+  const [isDark, setIsDark] = useState(null);
+
 
   useEffect(() => {
     setIsDark(singleCardMode);
@@ -37,7 +39,6 @@ const BookSingleCard = ({ book, user, singleCardMode }) => {
 
       <div className="flex justify-between items-center mt-4 py-4 px-0">
         <button
-
           className={`${
             isDark
               ? "text-white bg-gray-800 border-gray-600 hover:bg-gray-700 hover:border-gray-600 focus:ring-gray-700"
@@ -69,7 +70,6 @@ const BookSingleCard = ({ book, user, singleCardMode }) => {
           </button>
         </Link>
         <Link to={`/books/details/${book._id}`}>
-
           <button
             className={`${
               isDark
@@ -91,7 +91,6 @@ const BookSingleCard = ({ book, user, singleCardMode }) => {
             {book.userId === user.id && book.userName === user.name && (
               <div className="flex">
                 <Link to={`/books/edit/${book._id}`}>
-
                   <button
                     className={`${
                       isDark
@@ -108,7 +107,6 @@ const BookSingleCard = ({ book, user, singleCardMode }) => {
                   </button>
                 </Link>
                 <Link to={`/books/delete/${book._id}`}>
-
                   <button
                     className={`${
                       isDark
@@ -131,7 +129,6 @@ const BookSingleCard = ({ book, user, singleCardMode }) => {
           <Link to={"/login"}>
             <button
               type="button"
-
               className={`${
                 isDark
                   ? "text-white bg-gray-800 border-gray-600 hover:bg-gray-700 hover:border-gray-600 focus:ring-gray-700"

@@ -56,17 +56,16 @@ const CreateBook = ({ user, createMode }) => {
       <div className="flex flex-col border-2 border-sky-800 rounded-xl sm:max-w-[600px] p-4 mx-auto mt-10 max-sm:mx-4">
         {user ? (
           <div>
-            <div className="my-4">
-
-              {alert && (
-                <div
-                  className="flex gap-2 bg-red-100 border border-red-400 text-red-700 px-4 py-1 rounded relative mb-1"
-                  role="alert"
-                >
-                  <strong className="font-bold">All fields</strong>
-                  <span className="block sm:inline">required!</span>
-                </div>
-              )}
+            {alert && (
+              <div
+                className="flex gap-2 bg-red-100 border border-red-400 text-red-700 px-4 py-1 rounded relative mb-1"
+                role="alert"
+              >
+                <strong className="font-bold">All fields</strong>
+                <span className="block sm:inline">required!</span>
+              </div>
+            )}
+            <div className="mb-4">
               <label
                 htmlFor="title"
                 className={`${
@@ -90,7 +89,6 @@ const CreateBook = ({ user, createMode }) => {
               />
             </div>
             <div className="my-4">
-
               <label
                 htmlFor="author"
                 className={`${
@@ -116,7 +114,6 @@ const CreateBook = ({ user, createMode }) => {
             <div className="my-4">
               <label
                 htmlFor="publishYear"
-
                 className={`${
                   createMode ? "text-gray-400" : "text-gray-500"
                 } text-xl text-gray-500`}
@@ -138,7 +135,6 @@ const CreateBook = ({ user, createMode }) => {
               />
             </div>
             <div className="my-4">
-
               <label
                 htmlFor="about"
                 className={`${

@@ -88,7 +88,7 @@ const EditBook = ({ user, editMode }) => {
                   <span className="block sm:inline">required!</span>
                 </div>
               )}
-              <div className="my-4">
+              <div className="mb-4">
                 <label
                   className={`${
                     editMode ? "text-gray-400" : "text-gray-500"
@@ -182,7 +182,7 @@ const EditBook = ({ user, editMode }) => {
               </button>
             </div>
           ) : (
-            <div className="flex justify-center max-w-[600px] border-2 border-sky-800 rounded-xl p-8 mx-auto mt-10 text-xl max-sm:mx-5">
+            <div className="mx-auto text-xl max-sm:mx-5">
               <strong>This book was not created by you.</strong>
             </div>
           )}

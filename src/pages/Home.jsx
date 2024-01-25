@@ -21,7 +21,7 @@ const Home = ({ user, appMode }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   let searchPage = searchParams.get("page") || 1;
 
-  const [isDark, setIsDark] = useState(true);
+  const [isDark, setIsDark] = useState(null);
 
   useEffect(() => {
     async function retrieveBooks() {
@@ -57,7 +57,7 @@ const Home = ({ user, appMode }) => {
 
   return (
     <div className="p-4 max-w-screen-xl mx-auto">
-      <div className="flex sm:justify-between sm:flex-row-reverse sm:items-center sm:mx-4 sm:gap-x-4 gap-y-4  flex-col justify-end items-end ">
+      <div className="flex sm:justify-between sm:flex-row-reverse sm:items-center sm:mx-4 sm:gap-x-4 gap-y-4  flex-col justify-end items-end">
         <form onSubmit={querySubmitHandle}>
           <div className="flex">
             <label
@@ -85,7 +85,7 @@ const Home = ({ user, appMode }) => {
                   isDark
                     ? "bg-gray-700 border-s-gray-700  border-gray-600 placeholder-gray-400 text-white focus:border-blue-500"
                     : "text-gray-900 border-gray-300 focus:ring-blue-500 focus:border-blue-500  bg-gray-50"
-                } block p-2.5 w-full z-20 text-xs sm:text-sm  rounded-e-lg border-s-gray-50 border-s-2 border`}
+                } block p-2.5 w-full min-w-28 sm:w-52 z-20 text-xs sm:text-sm  rounded-e-lg border-s-gray-50 border-s-2 border`}
                 placeholder="Search E.L.James, Nancy katyal, 2011..."
               />
               <button
@@ -138,12 +138,7 @@ const Home = ({ user, appMode }) => {
             <option value="card" defaultValue={"card"}>
               Cards view
             </option>
-            <option
-              // onClick={() => setShowType("table")}
-              value="table"
-            >
-              Table view
-            </option>
+            <option value="table">Table view</option>
           </select>
         </div>
       </div>

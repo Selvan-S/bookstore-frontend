@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 
 export const DarkModeToggle = ({ darkMode }) => {
-  const [isDark, setIsDark] = useState(true);
+  const [isDark, setIsDark] = useState(null);
+
   const [isChecked, setIsChecked] = useState(true);
 
   const systemPrefersDark = useMediaQuery(
@@ -16,15 +17,27 @@ export const DarkModeToggle = ({ darkMode }) => {
     }
   );
   useEffect(() => {
-    if (isDark) {
-      document.body.classList.add("dark");
-      setIsChecked(true);
+    if (isDark === null) {
+      if (systemPrefersDark) {
+        document.body.classList.add("dark");
+        setIsChecked(true);
+      } else {
+        document.body.classList.remove("dark");
+        setIsChecked(false);
+      }
+      darkMode(systemPrefersDark);
     } else {
-      document.body.classList.remove("dark");
-      setIsChecked(false);
+      if (isDark) {
+        document.body.classList.add("dark");
+        setIsChecked(true);
+      } else {
+        document.body.classList.remove("dark");
+        setIsChecked(false);
+      }
+      darkMode(isDark);
     }
-    darkMode(isDark);
   }, [isDark]);
+
   return (
     <label className="relative inline-flex items-center cursor-pointer">
       <input

@@ -12,7 +12,7 @@ import ShowBook from "./pages/ShowBook";
 
 const App = () => {
   const [user, setUser] = useState(null);
-  const [isDark, setIsDark] = useState(true);
+  const [isDark, setIsDark] = useState(null);
 
   /**
    * old code
