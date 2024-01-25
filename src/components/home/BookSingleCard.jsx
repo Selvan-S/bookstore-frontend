@@ -15,13 +15,6 @@ const BookSingleCard = ({ book, user, singleCardMode }) => {
     setIsDark(singleCardMode);
   }, [singleCardMode]);
 
-  const [isDark, setIsDark] = useState(null);
-
-
-  useEffect(() => {
-    setIsDark(singleCardMode);
-  }, [singleCardMode]);
-
   return (
     <div
       key={book._id}
