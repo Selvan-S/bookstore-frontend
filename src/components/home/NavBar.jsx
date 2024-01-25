@@ -2,12 +2,14 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { DarkModeToggle } from "../Toggle";
 
+
 export default function NavBar({ user, logout, mode, queryEmpty }) {
   const [isActive, setIsActive] = useState(false);
   const [isDark, setIsDark] = useState(true);
   useEffect(() => {
     mode(isDark);
   }, [isDark]);
+
 
   const emptyString = () => {
     queryEmpty();

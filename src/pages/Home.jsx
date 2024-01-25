@@ -8,6 +8,7 @@ import BooksTable from "../components/home/BooksTable";
 import PaginationBar from "../components/home/PaginationBar";
 import Search from "../components/home/Search";
 
+
 const Home = ({ user, appMode, queryEmpty, callQueryEmptyFun }) => {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -44,6 +45,7 @@ const Home = ({ user, appMode, queryEmpty, callQueryEmptyFun }) => {
     }
     retrieveBooks();
   }, [searchParams, defaultQuery]);
+
   useEffect(() => {
     setIsDark(appMode);
   }, [appMode]);
