@@ -8,7 +8,7 @@ import BooksTable from "../components/home/BooksTable";
 import PaginationBar from "../components/home/PaginationBar";
 import Search from "../components/home/Search";
 
-const Home = ({ user, appMode }) => {
+const Home = ({ user, appMode, queryEmpty, callQueryEmptyFun }) => {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showType, setShowType] = useState("card");
@@ -47,6 +47,10 @@ const Home = ({ user, appMode }) => {
   useEffect(() => {
     setIsDark(appMode);
   }, [appMode]);
+  useEffect(() => {
+    setDefaultQuery("");
+    callQueryEmptyFun(null);
+  }, [queryEmpty]);
   const querySubmitHandle = (event) => {
     event.preventDefault();
     setDefaultQuery(searchQuery);
@@ -152,7 +156,13 @@ const Home = ({ user, appMode }) => {
       {loading ? (
         <Spinner />
       ) : showType === "table" ? (
-        <BooksTable books={books} user={user} />
+        totalItemCount === 0 ? (
+          <p className="flex justify-center text-base">No results found</p>
+        ) : (
+          <BooksTable books={books} user={user} />
+        )
+      ) : totalItemCount === 0 ? (
+        <p className="flex justify-center text-base">No results found</p>
       ) : (
         <BookCards books={books} user={user} cardsMode={isDark} />
       )}

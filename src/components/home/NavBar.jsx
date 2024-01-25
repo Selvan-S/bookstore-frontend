@@ -2,19 +2,27 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { DarkModeToggle } from "../Toggle";
 
-export default function NavBar({ user, logout, mode }) {
+export default function NavBar({ user, logout, mode, queryEmpty }) {
   const [isActive, setIsActive] = useState(false);
   const [isDark, setIsDark] = useState(true);
   useEffect(() => {
     mode(isDark);
   }, [isDark]);
 
+  const emptyString = () => {
+    queryEmpty();
+  };
+
   return (
     <nav
       className={`${isDark ? "bg-gray-900" : "bg-white"}  border-gray-200 px-5`}
     >
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto py-4 px-0 md:px-4">
-        <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
+        <Link
+          onClick={emptyString}
+          to={"/"}
+          className="flex items-center space-x-3 rtl:space-x-reverse"
+        >
           <span
             className={`${
               isDark ? "text-white" : "text-gray-900"
@@ -22,7 +30,7 @@ export default function NavBar({ user, logout, mode }) {
           >
             Bookstore
           </span>
-        </a>
+        </Link>
         <div className="flex gap-6 items-center">
           <div className="max-md:block md:hidden">
             <DarkModeToggle darkMode={(mode) => setIsDark(mode)} />
@@ -68,6 +76,7 @@ export default function NavBar({ user, logout, mode }) {
           >
             <li>
               <Link
+                onClick={emptyString}
                 to={"/?page=1"}
                 className={`${
                   isDark
