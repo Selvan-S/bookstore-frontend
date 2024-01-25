@@ -9,7 +9,7 @@ import BookModal from "./BookModal";
 
 const BookSingleCard = ({ book, user, singleCardMode }) => {
   const [showModal, setShowModal] = useState(false);
-  const [isDark, setIsDark] = useState(true);
+  const [isDark, setIsDark] = useState(null);
 
   useEffect(() => {
     setIsDark(singleCardMode);

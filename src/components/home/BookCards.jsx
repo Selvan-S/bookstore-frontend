@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import BookSingleCard from "./BookSingleCard";
 
 const BookCards = ({ books, user, cardsMode }) => {
-  const [isDark, setIsDark] = useState(true);
+  const [isDark, setIsDark] = useState(null);
   useEffect(() => {
     setIsDark(cardsMode);
   }, [cardsMode]);

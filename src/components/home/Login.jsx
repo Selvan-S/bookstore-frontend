@@ -11,7 +11,7 @@ const Login = ({ login, mode }) => {
   const [isDisabled, setIsDisabled] = useState(true);
   const [nameAlert, setNameAlert] = useState(true);
   const [idAlert, setIdAlert] = useState(true);
-  const [isDark, setIsDark] = useState(true);
+  const [isDark, setIsDark] = useState(null);
 
   useEffect(() => {
     if (user.name) {

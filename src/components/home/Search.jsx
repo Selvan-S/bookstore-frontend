@@ -26,7 +26,7 @@ export default function Search({ search, mode }) {
   const searchFilter = (filter) => {
     search(filter);
   };
-  const [isDark, setIsDark] = useState(true);
+  const [isDark, setIsDark] = useState(null);
   useEffect(() => {
     setIsDark(mode);
   }, [mode]);
@@ -40,7 +40,7 @@ export default function Search({ search, mode }) {
               isDark
                 ? "text-white bg-gray-700 hover:bg-gray-600 focus:ring-gray-700 border-gray-600"
                 : "text-gray-900 bg-gray-100  border-gray-300  hover:bg-gray-200  focus:ring-gray-100"
-            } border focus:ring-4 focus:outline-none w-28 sm:w-32 justify-between flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-xs sm:text-sm font-medium text-center rounded-s-lg`}
+            } border focus:ring-4 focus:outline-none w-full sm:w-32 justify-between flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-xs sm:text-sm font-medium text-center rounded-s-lg`}
           >
             <span className="flex items-center">
               <span className=" block truncate capitalize">
