@@ -14,6 +14,8 @@ const App = () => {
   const [user, setUser] = useState(null);
   const [isDark, setIsDark] = useState(null);
 
+  const [queryEmpty, setQueryEmpty] = useState(null);
+
   /**
    * old code
   const initialInfoState = {
@@ -42,6 +44,9 @@ const App = () => {
     sessionStorage.removeItem("userInfo");
   }
 
+  const emptyString = (value) => {
+    setQueryEmpty(value);
+  };
   /*
 old code for reference
 const userLogin = async () => {
@@ -65,10 +70,25 @@ if (count < 2 && limit < 2) {
         user={user}
         logout={logout}
         mode={(darkOrLight) => setIsDark(darkOrLight)}
+        queryEmpty={() => {
+          emptyString("");
+        }}
       />
       <div>
         <Routes>
-          <Route path="/" element={<Home user={user} appMode={isDark} />} />
+          <Route
+            path="/"
+            element={
+              <Home
+                user={user}
+                appMode={isDark}
+                queryEmpty={queryEmpty}
+                callQueryEmptyFun={(value) => {
+                  emptyString(value);
+                }}
+              />
+            }
+          />
           <Route
             path="/books/create"
             element={<CreateBook user={user} createMode={isDark} />}

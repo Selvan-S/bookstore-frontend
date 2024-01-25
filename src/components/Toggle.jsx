@@ -3,7 +3,6 @@ import { useMediaQuery } from "react-responsive";
 
 export const DarkModeToggle = ({ darkMode }) => {
   const [isDark, setIsDark] = useState(null);
-
   const [isChecked, setIsChecked] = useState(true);
 
   const systemPrefersDark = useMediaQuery(

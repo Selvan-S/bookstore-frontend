@@ -9,6 +9,11 @@ import BookModal from "./BookModal";
 
 const BookSingleCard = ({ book, user, singleCardMode }) => {
   const [showModal, setShowModal] = useState(false);
+  const [isDark, setIsDark] = useState(null);
+
+  useEffect(() => {
+    setIsDark(singleCardMode);
+  }, [singleCardMode]);
 
   const [isDark, setIsDark] = useState(null);
 
@@ -23,7 +28,6 @@ const BookSingleCard = ({ book, user, singleCardMode }) => {
       className="border-2 border-gray-500 rounded-lg px-3 py-2 m-4 relative hover:shadow-xl"
     >
       <h2 className="absolute top-1 right-2 px-5 py-2 flex items-center gap-1 text-sm text-gray-900  border focus:outline-none focus:ring-4  font-medium bg-red-300 dark:gray-900 border-gray-600 hover:border-gray-600 focus:ring-gray-700 rounded-lg">
-
         <span className={`text-gray-900 text-xs `}>
           <strong>{book.publishYear}</strong>
         </span>
