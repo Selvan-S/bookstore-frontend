@@ -22,11 +22,14 @@ function classNames(...classes) {
 }
 
 export default function Search({ search, mode }) {
+
   const [selected, setSelected] = useState(searchBy[0]);
   const searchFilter = (filter) => {
     search(filter);
   };
+
   const [isDark, setIsDark] = useState(null);
+
   useEffect(() => {
     setIsDark(mode);
   }, [mode]);

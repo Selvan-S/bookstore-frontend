@@ -44,9 +44,11 @@ const Home = ({ user, appMode }) => {
     }
     retrieveBooks();
   }, [searchParams, defaultQuery]);
+
   useEffect(() => {
     setIsDark(appMode);
   }, [appMode]);
+
   const querySubmitHandle = (event) => {
     event.preventDefault();
     setDefaultQuery(searchQuery);
